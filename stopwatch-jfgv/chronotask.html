@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChronoTask</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="logo-icon">⏱</div>
+  <h1>ChronoTask</h1>
+</header>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab-btn stop-tab active" onclick="switchTab('stopwatch')">⏱ Cronómetro</button>
+  <button class="tab-btn count-tab" onclick="switchTab('countdown')">⏳ Cuenta Atrás</button>
+</div>
+
+<!-- ══════════ STOPWATCH CARD ══════════ -->
+<div class="card active" id="stopwatch-card">
+  <div class="clock-wrap">
+    <div class="clock-label">Tiempo transcurrido</div>
+    <div class="clock" id="sw-clock">00:00:00<span class="ms">.00</span></div>
+    <div style="display:flex;justify-content:center;margin-top:12px">
+      <div class="status-pill idle" id="sw-status"><span class="dot"></span><span id="sw-status-text">En espera</span></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="btn-row" id="sw-main-btns">
+    <button class="btn btn-primary" id="sw-start-btn" onclick="swStart()">▶ Iniciar</button>
+  </div>
+  <div class="btn-row" id="sw-running-btns" style="display:none">
+    <button class="btn btn-pause" onclick="swPause()" id="sw-pause-btn">⏸ Pausar</button>
+    <button class="btn btn-ghost" onclick="swLap()">⊕ Vuelta</button>
+    <button class="btn btn-stop" onclick="swStop()">■ Detener</button>
+  </div>
+  <div class="btn-row" id="sw-done-btns" style="display:none">
+    <button class="btn btn-primary" onclick="swReset()">↺ Nuevo Cronómetro</button>
+  </div>
+
+  <div class="laps-section" id="sw-laps">
+    <div class="laps-title">Registros de vuelta</div>
+    <div class="laps-list" id="sw-laps-list"></div>
+  </div>
+</div>
+
+<!-- ══════════ COUNTDOWN CARD ══════════ -->
+<div class="card" id="countdown-card">
+  <div class="clock-wrap">
+    <div class="clock-label">Tiempo restante</div>
+    <div class="clock" id="cd-clock">00:00:00</div>
+    <div class="progress-bar-wrap" id="cd-progress-wrap">
+      <div class="progress-bar-fill" id="cd-progress-fill" style="width:100%"></div>
+    </div>
+    <div style="display:flex;justify-content:center;margin-top:12px">
+      <div class="status-pill idle" id="cd-status"><span class="dot"></span><span id="cd-status-text">En espera</span></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div id="cd-input-area">
+    <div style="text-align:center;font-size:.75rem;color:var(--text-dim);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px">Establecer tiempo</div>
+    <div class="time-input-row">
+      <div class="time-field-wrap">
+        <input class="time-field" type="number" id="cd-h" min="0" max="99" value="0" placeholder="00">
+        <label>Horas</label>
+      </div>
+      <div class="time-sep">:</div>
+      <div class="time-field-wrap">
+        <input class="time-field" type="number" id="cd-m" min="0" max="59" value="5" placeholder="00">
+        <label>Min</label>
+      </div>
+      <div class="time-sep">:</div>
+      <div class="time-field-wrap">
+        <input class="time-field" type="number" id="cd-s" min="0" max="59" value="0" placeholder="00">
+        <label>Seg</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert-finished" id="cd-alert">
+    <div class="alert-icon">🎯</div>
+    <div class="alert-text"><strong>¡Tiempo Agotado!</strong><br>La cuenta atrás ha finalizado.</div>
+  </div>
+
+  <div class="btn-row" id="cd-main-btns">
+    <button class="btn btn-blue" id="cd-start-btn" onclick="cdStart()">▶ Iniciar Cuenta Atrás</button>
+  </div>
+  <div class="btn-row" id="cd-running-btns" style="display:none">
+    <button class="btn btn-pause" onclick="cdPause()" id="cd-pause-btn">⏸ Pausar</button>
+    <button class="btn btn-stop" onclick="cdStop()">■ Cancelar</button>
+  </div>
+  <div class="btn-row" id="cd-done-btns" style="display:none">
+    <button class="btn btn-blue" onclick="cdReset()">↺ Nueva Cuenta Atrás</button>
+  </div>
+</div>
+
+<footer>ChronoTask &nbsp;•&nbsp; Hecho con HTML5, CSS3 &amp; JS Vanilla</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
